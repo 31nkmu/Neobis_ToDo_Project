@@ -15,7 +15,7 @@ class TodoList(ListView):
     context_object_name = 'todos'
 
     def get_queryset(self):
-        return Todo.objects.all().order_by('id')
+        return Todo.objects.all().order_by('created_at')
 
 
 class CreateTodo(CreateView):
@@ -27,7 +27,7 @@ class CreateTodo(CreateView):
 class UpdateTodo(UpdateView):
     model = Todo
     template_name = 'todolist/update_todo.html'
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'deadline')
     success_url = reverse_lazy('home')
 
 

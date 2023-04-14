@@ -11,17 +11,20 @@
             <label>Новая задача</label>
             <input type="text" name="title" placeholder="Введи название задачи"> <br>
             <input type="text" name="description" placeholder="Введите описание"> <br>
+            <input type="date" name="deadline" placeholder="Введите срок выполнения"> <br>
         </div>
         <button class="ui teal basic button" type="submit">Добавить</button>
     </form>
 
 {% for todo in todos %}
 <div class="ui segment">
-    <p class="ui big header">{{ todo.id }} {{ todo.title }}</p>
+    <p class="ui big header">{{ todo.title }}</p>
     {% if todo.description %}
-        <p>{{ todo.description }}</p>
+        <p class="ui small header">{{ todo.description }}</p>
     {% endif %}
-    <a href="{% url 'update_todo' pk=todo.id %}" class="ui primary basic button">Изменить задание</a><br><br>
+    <p class="ui small">Дата создания: {{ todo.created_at }}</p>
+    <p class="ui small">Срок выполнения: {{ todo.deadline }}</p>
+    <a href="{% url 'update_todo' pk=todo.id %}" class="ui primary basic button">Изменить задание</a>
     {% if todo.is_completed is False %}
         <a class="ui negative basic button" href="{% url 'update' pk=todo.id %}">Не завершено</a>
     {% else %}
